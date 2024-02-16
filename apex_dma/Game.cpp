@@ -252,7 +252,7 @@ QAngle Entity::GetRecoil() {
 }
 
 void Entity::get_name(char *name) {
-  uint64_t index = (this->entity_index - 1) << 4;
+  uint64_t index = (this->entity_index - 1) * 24;
   uint64_t name_ptr = 0;
   apex_mem.Read<uint64_t>(g_Base + offsets.name_list + index, name_ptr);
   apex_mem.ReadArray<char>(name_ptr, name, 32);
@@ -330,7 +330,7 @@ LoveStatus Entity::check_love_player() {
 
 int Entity::xp_level() {
   assert(this->is_player);
-  return this->player_xp_level;
+  return this->player_xp_level + 1;
 }
 
 int Entity::read_xp_level() {
